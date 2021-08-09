@@ -1,0 +1,24 @@
+.cover{
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: cover;
+
+}
+
+.user-avatar{
+  width: 38px;
+  height: 38px;
+}
+.lang-link {
+  font-size: 1.7rem;
+
+}
+
+.cat-img{
+  height: 16px;
+  width: 16px;
+}
+
+
+
+

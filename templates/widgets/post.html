@@ -1,0 +1,37 @@
+<div class="border-bottom mt-3">
+    <div class="d-flex align-items-center">
+        <span class="d-inline cat-img mr-1 cover" style="background-image: url('{{ post.category.image.url }}')"></span>
+        <a class="text-black-50" href="{% url 'main:cat' post.category.id %}">{{ post.category.name }}</a>
+
+        <span class="d-inline cat-img mr-1 ml-3 cover" style="background-image: url('{{ post.user.url }}')"></span>
+        {{ post.user.username }}
+    </div>
+{% if post.is_audio %}
+    <audio controls>
+        <source src="{{ post.fields.url }}">
+    </audio>
+{% elif post.is_video %}
+    <video controls width="100%" height="400px">
+        <source src="{{ post.fields.url }}">
+    </video>
+
+{% elif post.is_image %}
+    <img src="{{ post.fields.url }}" class="img-fluid"/>
+{% else %}
+<h1 class="text-muted">Unsupported format</h1>
+{% endif %}
+<div class="p-3">
+    {{ post.comment }}
+</div>
+<div class="d-flex mb-3">
+    <a href="{% url 'main:like' 'like' post.id %}?return={{ request.get_full_path }}" class="border px-3 py-2 text-muted">
+        <i class="bi-hand-thumbs-up"></i> {{ post.like }}
+    </a>
+    <a href="{% url 'main:like' 'dislike' post.id %}?return={{ request.get_full_path }}" class="border px-3 py-2 text-muted ml-2">
+        <i class="bi-hand-thumbs-down"></i> {{ post.dislike }}
+    </a>
+    <a href="{% url 'main:comments' post.id %}" class="border px-3 py-2 text-muted ml-2">
+        <i class="bi-chat-left-fill"></i>
+    </a>
+</div>
+</div>

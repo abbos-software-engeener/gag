@@ -1,0 +1,31 @@
+{% extends 'layouts/base.html' %}
+{% load static i18n bootstrap_pagination %}
+{% block content %}
+    <div class="row">
+        <div class="col-lg-2">
+            <h5 class="text-uppercase text-muted">{% translate 'Kategoriyalar' %}</h5>
+            {% for category in categories%}
+                <div class="cat-link">
+                    <a class="d-flex align-items-center text-black-50 " data-toggle="" href="{% url 'main:cat' category.id %}">
+                        <span class="d-inline cat-img mr-2 cover" id="id_img" style="background-image: url('{{ category.image.url }}')"></span>
+                        <span class="cat-name">{{ category.name_uz }}</span>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="col-lg-10" id="id_category">
+            <img src="{% static 'img/banner.gif' %}" alt="Banner" class="img-fluid"/>
+            <div class="row">
+                <div class="col-lg-9" id="id_content">
+                <h1 class="text-muted mt-3">{{ cat.name }}</h1>
+                    {% block banner_content %}{% endblock %}
+                </div>
+                <div class="col-lg-3">
+                    <img src="{% static 'img/small-banner.png' %}" class="img-fluid mt-3"/>
+                    <img src="{% static 'img/small-banner.png' %}" class="img-fluid mt-3"/>
+                    <img src="{% static 'img/small-banner.png' %}" class="img-fluid mt-3"/>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

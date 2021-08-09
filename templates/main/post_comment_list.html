@@ -1,0 +1,31 @@
+{% extends 'layouts/banner.html' %}
+{% load crispy_forms_filters i18n bootstrap_pagination %}
+{% block banner_content%}
+    {% include 'widgets/post.html' with post=post %}
+    <form method="post" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form|crispy }}
+    <button type="submit" class="btn btn-success">Izoh qoldirish</button>
+    </form>
+
+    {% for row in object_list %}
+        <div class="d-flex mt-3 pb-3 border-bottom">
+            <div class="user-avatar cover rounded-circle" style="background-image: url('{{ row.user.avatar }}')"></div>
+            <div class="flex-grow-1 ml-5">
+                <div class="float-right text-muted">{{ row.added_at }}</div>
+                <strong>{{ row.user.username }}</strong>
+                <div class="mt-2">
+                    {{ row.comment|linebreaksbr }}
+                </div>
+                {% if row.image %}
+                    <img src="{{ row.image.url }}" alt="" class="w-50" width="300" height="250" />
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+
+    <div class="mt-3">
+        {% bootstrap_paginate page_obj %}
+    </div>
+
+{% endblock %}
