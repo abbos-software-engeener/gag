@@ -20,8 +20,8 @@ class Category(TranslateMixin, models.Model):
 
 
 class Post(models.Model):
-    category = models.ForeignKey('main.Category', on_delete=models.RESTRICT)
-    user = models.ForeignKey("client.User", on_delete=models.RESTRICT)
+    category = models.ForeignKey('main.Category', on_delete=models.CASCADE)
+    user = models.ForeignKey("client.User", on_delete=models.CASCADE)
     added_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     like = models.IntegerField(default=0)
@@ -47,9 +47,9 @@ class Post(models.Model):
 
 
 class Post_Comment(models.Model):
-    parent = models.ForeignKey('main.Post_Comment', null=True, default=None, on_delete=models.RESTRICT)
-    post = models.ForeignKey('main.Post', null=True, default=None, on_delete=models.RESTRICT)
-    user = models.ForeignKey('client.User', default=None, on_delete=models.RESTRICT)
+    parent = models.ForeignKey('main.Post_Comment', null=True, default=None, on_delete=models.CASCADE)
+    post = models.ForeignKey('main.Post', null=True, default=None, on_delete=models.CASCADE)
+    user = models.ForeignKey('client.User', default=None, on_delete=models.CASCADE)
     comment = models.TextField(verbose_name="izoh")
     image = models.ImageField(upload_to=UploadTo("comment"), null=True, default=None, blank=True)
     like = models.CharField(max_length=100, default=0)
