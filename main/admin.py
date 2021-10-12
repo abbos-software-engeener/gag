@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.admin import ModelAdmin
-from main.models import Category
+from main.models import *
 
 
 class MainAdmin(admin.ModelAdmin):
@@ -9,3 +9,6 @@ class MainAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Category, MainAdmin)
+
+admin.site.register(Post_Comment)
+admin.site.register(Post)
